@@ -1,9 +1,12 @@
-import React from 'react';
 import { Avatar as MuiAvatar } from '@mui/material';
 import type { AvatarProps } from './Avatar/types';
 import { getAvatarStyles } from './Avatar/styles';
 
-export const OperatorAvatar: React.FC<AvatarProps> = ({ src, alt, children }) => {
+export const OperatorAvatar: React.FC<AvatarProps> = ({
+  src,
+  alt,
+  children,
+}) => {
   const avatarSrc = src?.includes('github') ? '' : src;
 
   return (

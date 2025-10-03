@@ -35,7 +35,10 @@ export default defineConfig([
     },
     rules: {
       '@typescript-eslint/await-thenable': 'error',
-      '@typescript-eslint/no-floating-promises': ['error', { ignoreVoid: true }],
+      '@typescript-eslint/no-floating-promises': [
+        'error',
+        { ignoreVoid: true },
+      ],
       '@typescript-eslint/no-misused-promises': [
         'error',
         { checksVoidReturn: { attributes: false } },

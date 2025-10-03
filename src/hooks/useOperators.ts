@@ -20,7 +20,7 @@ export function useOperators({ search, page, pageSize }: UseOperatorsProps) {
       dispatch(
         setOperators({
           items: query.data.operatorsWithAddons,
-        }),
+        })
       );
     }
   }, [query.data, dispatch]);

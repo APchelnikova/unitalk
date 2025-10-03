@@ -15,11 +15,16 @@ import { formatDate } from '@/utils/date.ts';
 import { OperatorAvatar } from '@/Components/Common/Avatar.tsx';
 import { StyledHeaderCell, StyledContainer, StyledTableCell } from './styles';
 import type { OperatorsTableProps } from './types';
-import { usePagination } from '@/hooks/usePagination.ts';
 
-export const OperatorsTable: React.FC<OperatorsTableProps> = ({ data, loading = false, totalCount }) => {
-  const { page, rowsPerPage, handleRowsPerPageChange, handlePageChange } = usePagination();
-
+export const OperatorsTable: React.FC<OperatorsTableProps> = ({
+  data,
+  loading = false,
+  totalCount,
+  page,
+  rowsPerPage,
+  onPageChange,
+  onRowsPerPageChange,
+}) => {
   if (loading) {
     return (
       <Box display="flex" justifyContent="center" minHeight="430px" p={4}>
@@ -50,7 +55,9 @@ export const OperatorsTable: React.FC<OperatorsTableProps> = ({ data, loading = 
                 key={operator.id}
                 hover
               >
-                <StyledTableCell>{page * rowsPerPage + index + 1}</StyledTableCell>
+                <StyledTableCell>
+                  {page * rowsPerPage + index + 1}
+                </StyledTableCell>
                 <StyledTableCell>
                   <Box display="flex" alignItems="center" gap={1}>
                     <OperatorAvatar src={operator.avatar} alt={operator.name} />
@@ -70,7 +77,9 @@ export const OperatorsTable: React.FC<OperatorsTableProps> = ({ data, loading = 
                   />
                 </StyledTableCell>
                 <StyledTableCell>
-                  <Typography variant="body2">{formatDate(operator.createdAt)}</Typography>
+                  <Typography variant="body2">
+                    {formatDate(operator.createdAt)}
+                  </Typography>
                 </StyledTableCell>
                 <StyledTableCell>
                   <Typography variant="body2" color="text.secondary">
@@ -89,8 +98,8 @@ export const OperatorsTable: React.FC<OperatorsTableProps> = ({ data, loading = 
         count={totalCount || 0}
         rowsPerPage={rowsPerPage}
         page={page}
-        onPageChange={handlePageChange}
-        onRowsPerPageChange={handleRowsPerPageChange}
+        onPageChange={onPageChange}
+        onRowsPerPageChange={onRowsPerPageChange}
         labelRowsPerPage="Rows per page:"
         sx={{
           '& .MuiTablePagination-selectLabel': {

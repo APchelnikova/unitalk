@@ -12,7 +12,7 @@ interface UsePaginationReturn {
   setRowsPerPage: (rowsPerPage: number) => void;
   handlePageChange: (
     event: React.MouseEvent<HTMLButtonElement> | null,
-    newPage: number,
+    newPage: number
   ) => void;
   handleRowsPerPageChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   resetPagination: () => void;
@@ -35,12 +35,14 @@ export const usePagination = ({
 
   const handlePageChange = (
     _event: React.MouseEvent<HTMLButtonElement> | null,
-    newPage: number,
+    newPage: number
   ) => {
     setPage(newPage);
   };
 
-  const handleRowsPerPageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleRowsPerPageChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
     const newRowsPerPage = parseInt(event.target.value, 10);
     setRowsPerPage(newRowsPerPage);
     setPage(0);

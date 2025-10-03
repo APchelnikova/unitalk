@@ -1,5 +1,10 @@
 import { api } from '../api/client';
-import type { Operator, OperatorAddon, OperatorWithAddon, UseOperatorsProps } from '@/types/operators';
+import type {
+  Operator,
+  OperatorAddon,
+  OperatorWithAddon,
+  UseOperatorsProps,
+} from '@/types/operators';
 
 export async function fetchOperators({
   search,
@@ -13,7 +18,9 @@ export async function fetchOperators({
     params.append('page', page.toString());
     params.append('limit', pageSize.toString());
 
-    const { data } = await api.get<Operator[]>(`/operator?${params.toString()}`);
+    const { data } = await api.get<Operator[]>(
+      `/operator?${params.toString()}`
+    );
 
     return data;
   } catch (error: any) {
@@ -40,19 +47,22 @@ export async function fetchOperatorsWithAddons({
   search,
   page,
   pageSize,
-}: UseOperatorsProps): Promise<{ operatorsWithAddons: OperatorWithAddon[]; totalCount: number }> {
+}: UseOperatorsProps): Promise<{
+  operatorsWithAddons: OperatorWithAddon[];
+  totalCount: number;
+}> {
   try {
     const [operators, addons, totalCount] = await Promise.all([
       fetchOperators({ search, page, pageSize }),
       fetchOperatorsAddons(),
-      fetchAllOperators(search)
+      fetchAllOperators(search),
     ]);
 
     const byOpId = new Map<string, OperatorAddon>();
-    addons.forEach((a) => byOpId.set(a.id, a));
+    addons.forEach(a => byOpId.set(a.id, a));
 
     return {
-      operatorsWithAddons: operators.map((operator) => {
+      operatorsWithAddons: operators.map(operator => {
         const addon = byOpId.get(operator.id);
         return {
           ...operator,
@@ -72,7 +82,9 @@ export async function fetchAllOperators(search?: string): Promise<number> {
     const params = new URLSearchParams();
     if (search) params.append('search', search);
 
-    const { data } = await api.get<Operator[]>(`/operator?${params.toString()}`);
+    const { data } = await api.get<Operator[]>(
+      `/operator?${params.toString()}`
+    );
     return data.length;
   } catch (error: any) {
     console.error('Error fetching operators count:', error);

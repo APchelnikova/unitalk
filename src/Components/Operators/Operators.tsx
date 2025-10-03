@@ -42,7 +42,7 @@ export const Operators = () => {
       <StyledPaper>
         <Search onSearch={handleSearch} />
 
-        {operators && operators.length > 0 ? (
+        {isLoading || operators?.length > 0 ? (
           <OperatorsTable data={operators} loading={isLoading} totalCount={totalCount} />
         ) : (
           <Box display="flex" justifyContent="center" minHeight="440px" p={4}>

@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export const API_TOKEN = '68de50cbd7b591b4b78f1320';
+const API_TOKEN = import.meta.env.VITE_API_TOKEN;
 export const API_BASE_URL = `https://${API_TOKEN}.mockapi.io/api`;
 
 export const api = axios.create({
